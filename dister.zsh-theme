@@ -20,7 +20,7 @@ function get_pwd(){
   echo $prompt_short_dir
 }
 
-PROMPT='$(get_pwd) $(git_prompt_info)%{$reset_color%}$(git_prompt_status)%{$reset_color%}$(git_prompt_ahead)%{$reset_color%} $(git_time_since_commit)%{$reset_color%}'$'\n''$ret_status %{$fg[white]%}%{$reset_color%}%{$reset_color%}'
+PROMPT='$(get_pwd)  $(git_prompt_info)%{$reset_color%}$(git_prompt_status)%{$reset_color%}$(git_prompt_ahead)%{$reset_color%} $(git_time_since_commit)%{$reset_color%}'$'\n''$ret_status %{$fg[white]%}%{$reset_color%}%{$reset_color%}'
 
 RPROMPT='${time}'
 
