@@ -20,7 +20,7 @@ function get_pwd(){
   echo $prompt_short_dir
 }
 
-PROMPT='$(get_pwd)  $(git_prompt_info)%{$reset_color%}$(git_prompt_status)%{$reset_color%}$(git_prompt_ahead)%{$reset_color%} $(git_time_since_commit)%{$reset_color%}'$'\n''$ret_status %{$fg[white]%}%{$reset_color%}%{$reset_color%}'
+PROMPT='$(get_pwd) $(git_prompt_info)%{$reset_color%}$(git_prompt_status)%{$reset_color%}$(git_prompt_ahead)%{$reset_color%} $(git_time_since_commit)%{$reset_color%}'$'\n''$ret_status %{$fg[white]%}%{$reset_color%}%{$reset_color%}'
 
 RPROMPT='${time}'
 
@@ -40,7 +40,7 @@ time=$time_enabled
 #ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}"
 
 # Spacing meets the format for the width of each character and the expected following chars
-ZSH_THEME_GIT_PROMPT_PREFIX="☁  %{$fg[cyan]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="☁  %{$fg[blue]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%} ☂  " # Ⓓ
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%} ☀ " # Ⓞ
@@ -73,6 +73,7 @@ function git_time_since_commit() {
             last_commit=`git log --pretty=format:'%at' -1 2> /dev/null`
             now=`date +%s`
             seconds_since_last_commit=$((now-last_commit))
+            time_from_epoch=`date +%s`
 
             # Totals
             MINUTES=$((seconds_since_last_commit / 60))
@@ -94,8 +95,10 @@ function git_time_since_commit() {
             else
                 COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL"
             fi
-
-            if [ "$HOURS" -gt 168 ]; then
+            
+            if [ "$((time_from_epoch-3))" -lt "$seconds_since_last_commit" ]; then
+                echo "${COLOR}n%{$reset_color%}"
+            elif [ "$HOURS" -gt 168 ]; then
                 echo "$COLOR>w%{$reset_color%}"
             elif [ "$HOURS" -gt 48 ]; then
                 echo "$COLOR${DAYS}d%{$reset_color%}"
@@ -114,4 +117,3 @@ function git_time_since_commit() {
         fi
     fi
 }
-

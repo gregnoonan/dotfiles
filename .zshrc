@@ -1,4 +1,3 @@
-# Hi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -65,9 +64,6 @@ export UPDATE_ZSH_DAYS=13
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
-    yarn
-    pip
-    rbenv
     docker
 )
 
@@ -102,6 +98,7 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias zshrefresh=". ~/.zshrc"
+alias zshtheme="vim ~/.oh-my-zsh/themes/$ZSH_THEME.zsh-theme"
 alias la='ls -a'
 alias ll='ls -l'
 alias lla='ls -la'
@@ -112,27 +109,13 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias cb='cd -'
 
-
-# added by Anaconda3 5.3.0 installer
-# >>> conda init >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$(CONDA_REPORT_ERRORS=false '/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    \eval "$__conda_setup"
-else
-    if [ -f "/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/anaconda3/etc/profile.d/conda.sh"
-        CONDA_CHANGEPS1=false conda activate base
-    else
-        \export PATH="/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda init <<<
-
-conda deactivate
-
+# Misc
 eval "$(rbenv init -)"
-
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+#export PATH="/usr/local/opt/llvm/bin:$PATH"
+export PATH="/usr/local/opt/llvm@5/bin:$PATH"
+export GOPATH="$HOME/.go"
+export PATH=/usr/local/Cellar/rabbitmq/3.7.11/sbin:$PATH
